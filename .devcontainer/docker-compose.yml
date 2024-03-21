@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  python-dev:
+    container_name: python-dev
+    hostname: python-dev.local
+    build:
+      context: .
+    working_dir: /src
+    volumes:
+      - ..:/src:cached
+    command: >
+      bash -c "sleep infinity"
+    networks:
+      python-dev-net:
+
+networks:
+  python-dev-net:
