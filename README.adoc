@@ -1,4 +1,14 @@
 = FastUI-Intro
-Trying to get learn FastUI.
+Trying to learn FastUI.
 
+== TL;DR
+DevContainer i created to get started w FastUI. 
+
+== What's inside
+* Base image is python 3.11
+* Dependencies FastUI, FastAPI, uvicorn,pytest
+* helper script `./start_server.sh` to start the app in reload mode
+
+== Resources
 https://www.youtube.com/watch?v=eBWrnSyN2iw[Promising tutorial...]
+
