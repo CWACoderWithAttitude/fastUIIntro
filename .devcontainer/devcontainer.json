@@ -1,5 +1,5 @@
 {
-  "name": "python-dev",
+  "name": "fastuiintro",
   "dockerComposeFile": [
     "docker-compose.yml"
   ],
@@ -29,7 +29,7 @@
       ]
     }
   },
-  "service": "python-dev",
+  "service": "fastuiintro",
   "workspaceFolder": "/src",
   "remoteUser": "vscode",
   "postStartCommand": "python -m pip install -r requirements.txt && pytest-w test . -c './pytest-watcher-config.yaml' ",

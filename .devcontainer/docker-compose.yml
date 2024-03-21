@@ -1,18 +1,20 @@
 version: "3.7"
 
 services:
-  python-dev:
-    container_name: python-dev
-    hostname: python-dev.local
+  fastuiintro:
+    container_name: fastuiintro
+    hostname: fastuiintro.local
     build:
       context: .
     working_dir: /src
     volumes:
       - ..:/src:cached
+    ports:
+      - 1800:8000
     command: >
       bash -c "sleep infinity"
     networks:
-      python-dev-net:
+      fastuiintro-net:
 
 networks:
-  python-dev-net:
+  fastuiintro-net:

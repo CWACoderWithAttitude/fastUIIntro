@@ -1,0 +1,4 @@
+= FastUI-Intro
+Trying to get learn FastUI.
+
+https://www.youtube.com/watch?v=eBWrnSyN2iw[Promising tutorial...]
