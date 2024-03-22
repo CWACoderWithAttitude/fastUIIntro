@@ -51,9 +51,9 @@ def ships_table() -> list[AnyComponent]:
                     data=ships,
                     # define two columns for the table
                     columns=[
-                        # the first is the users, name rendered as a link to their profile
+                        # the first is the ships, name rendered as a link to their profile
                         DisplayLookup(field='name', on_click=GoToEvent(url='/ships/{id}/')),
-                        # the second is the date of birth, rendered as a date
+                        # the second warp speed
                         DisplayLookup(field='speed', mode=DisplayMode.auto),
                     ],
                 ),
@@ -61,25 +61,6 @@ def ships_table() -> list[AnyComponent]:
         ),
     ]
 
-
-@app.get("/api/user/{user_id}/", response_model=FastUI, response_model_exclude_none=True)
-def user_profile(user_id: int) -> list[AnyComponent]:
-    """
-    User profile page, the frontend will fetch this when the user visits `/user/{id}/`.
-    """
-    try:
-        user = next(u for u in users if u.id == user_id)
-    except StopIteration:
-        raise HTTPException(status_code=404, detail="User not found")
-    return [
-        c.Page(
-            components=[
-                c.Heading(text=user.name, level=2),
-                c.Link(components=[c.Text(text='Back')], on_click=BackEvent()),
-                c.Details(data=user),
-            ]
-        ),
-    ]
 @app.get("/api/ships/{ship_id}/", response_model=FastUI, response_model_exclude_none=True)
 def ship_profile(ship_id: int) -> list[AnyComponent]:
     """
@@ -98,7 +79,6 @@ def ship_profile(ship_id: int) -> list[AnyComponent]:
             ]
         ),
     ]
-
 
 @app.get('/{path:path}')
 async def html_landing() -> HTMLResponse:
