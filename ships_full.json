@@ -1,0 +1,174 @@
+[
+    {
+        "name": "USS Cerritos",
+        "sign": "NCC-75567",
+        "shipClass": "California"
+    },
+    {
+        "name": "USS Dauntless",
+        "sign": "NCC-80816",
+        "shipClass": ""
+    },
+    {
+        "name": "USS Protonstar",
+        "sign": "NCC-",
+        "shipClass": ""
+    },
+    {
+        "name": "USS Defiant",
+        "sign": "NCC-1764",
+        "shipClass": "Constitution"
+    },
+    {
+        "name": "USS Enterprise",
+        "sign": "NX-01",
+        "shipClass": "Constitution"
+    },
+    {
+        "name": "USS Franklin",
+        "sign": "NX-326",
+        "shipClass": "Starship",
+        "topSpeed": "Warp 4",
+        "captain": "balthazar edison",
+        "comment": "lost ~2160, first warp 4 capable ship"
+    },
+    {
+        "name": "USS Enterprise",
+        "sign": "NCC-1701",
+        "shipClass": "Constitution"
+    },
+    {
+        "name": "USS Enterprise",
+        "sign": "NCC-1701-A",
+        "shipClass": "Constitution"
+    },
+    {
+        "name": "USS Enterprise",
+        "sign": "NCC-1701-B",
+        "shipClass": "Excelsior"
+    },
+    {
+        "name": "USS Enterprise",
+        "sign": "NCC-1701-C",
+        "shipClass": "Ambassador"
+    },
+    {
+        "name": "USS Enterprise",
+        "sign": "NCC-1701-D",
+        "shipClass": "Galaxy"
+    },
+    {
+        "name": "USS Galaxy",
+        "sign": "NCC-",
+        "shipClass": "Galaxy",
+        "details": "http://memory-alpha.org/wiki/USS_Galaxy"
+    },
+    {
+        "name": "USS Lakota",
+        "sign": "NCC-",
+        "shipClass": "Excelsior"
+    },
+    {
+        "name": "USS T`Kumbra",
+        "sign": "NCC-",
+        "shipClass": "Nebula",
+        "details": "http://memory-alpha.org/wiki/USS_T%27Kumbra"
+    },
+    {
+        "name": "USS Rhode Island",
+        "sign": "NCC-72201",
+        "shipClass": "Nova",
+        "details": "http://memory-alpha.org/wiki/USS_Rhode_Island"
+    },
+    {
+        "name": "USS Defiant",
+        "sign": "NX-74205",
+        "shipClass": "Defiant",
+        "details": "http://memory-alpha.org/wiki/USS_Rhode_Island"
+    },
+    {
+        "name": "ISS Defiant",
+        "sign": "NX-74205",
+        "shipClass": "Defiant"
+    },
+    {
+        "name": "USS Discovery",
+        "sign": "NCC-1031",
+        "shipClass": "Crossfield",
+        "details": "http://memory-alpha.org/wiki/USS_Rhode_Island"
+    },
+    {
+        "name": "USS Crazy Horse",
+        "sign": "NCC-",
+        "shipClass": "Excelsior",
+        "details": "http://memory-alpha.org/wiki/USS_Crazy_Horse"
+    },
+    {
+        "name": "USS Yorktown",
+        "sign": "NCC-97422",
+        "shipClass": "",
+        "details": "http://memory-alpha.org/wiki/USS_Yorktown"
+    },
+    {
+        "name": "USS Yorktown",
+        "sign": "NCC-1717",
+        "shipClass": "",
+        "details": "https://memory-alpha.fandom.com/wiki/USS_Yorktown_(23rd_century)"
+    },
+    {
+        "name": "USS Yorktown",
+        "sign": "NCC-25345",
+        "shipClass": "",
+        "details": "https://memory-alpha.fandom.com/wiki/USS_Yorktown_(NCC-25345)"
+    },
+    {
+        "name": "USS Yorktown",
+        "sign": "NCC-61137",
+        "shipClass": "Zodiac",
+        "details": "https://memory-alpha.fandom.com/wiki/USS_Yorktown_(NCC-61137)"
+    },
+    {
+        "name": "USS Excelsior",
+        "sign": "NCC-2000",
+        "shipClass": "Excelsior",
+        "details": "https://memory-alpha.fandom.com/wiki/USS_Excelsior_(NCC-2000)"
+    },
+    {
+        "name": "USS Excelsior",
+        "sign": "NCC-27445",
+        "shipClass": "",
+        "details": "https://memory-alpha.fandom.com/wiki/USS_Excelsior_(NCC-27445)"
+    },
+    {
+        "name": "USS Excelsior",
+        "sign": "NCC-42037",
+        "shipClass": "",
+        "details": "https://memory-alpha.fandom.com/wiki/USS_Excelsior_(NCC-42037)"
+    },
+    {
+        "name": "USS Zheng He",
+        "sign": "NCC-86505",
+        "shipClass": "Inquiry",
+        "details": "http://memory-alpha.org/wiki/USS_Zheng_He"
+    },
+    {
+        "name": "USS Nathan Hale",
+        "sign": "NCC-86501",
+        "shipClass": "Inquiry",
+        "details": "http://memory-alpha.org/wiki/USS_Nathan_Hale"
+    },
+    {
+        "name": "USS Gorkon",
+        "sign": "NCC-40512",
+        "shipClass": "Excelsior",
+        "comment": "According to https://memory-alpha.fandom.com/wiki/Starships_(Decipher): sign is NCC-40521",
+        "details": "https://memory-alpha.fandom.com/wiki/USS_Gorkon"
+    },
+    {
+        "name": "USS Agamemnon",
+        "sign": "NCC-40512",
+        "shipClass": "Excelsior",
+        "comment": "According to https://memory-alpha.fandom.com/wiki/Starships_(Decipher): sign is NCC-40521",
+        "details": "https://memory-alpha.fandom.com/wiki/USS_Agamemnon"
+    }
+]
