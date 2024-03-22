@@ -9,6 +9,8 @@ DevContainer i created to get started w FastUI.
 * Dependencies FastUI, FastAPI, uvicorn,pytest
 * helper script `./start_server.sh` to start the app in reload mode
 
+The application is based on the example code published on https://github.com/pydantic/FastUI[the Github FastUI Page]
+
 == Resources
 https://www.youtube.com/watch?v=eBWrnSyN2iw[Promising tutorial...]
 

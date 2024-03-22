@@ -24,8 +24,8 @@
         "streetsidesoftware.code-spell-checker",
         "wesbos.theme-cobalt2",
         "ms-python.python",
-        //"demystifying-javascript.python-extensions-pack",
-        "frhtylcn.pythonsnippets"
+        "frhtylcn.pythonsnippets",
+        "asciidoctor.asciidoctor-vscode"
       ]
     }
   },
