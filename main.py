@@ -14,8 +14,20 @@ class User(BaseModel):
     id: int
     name: str
     dob: date = Field(title='Date of Birth')
+class Ship(BaseModel):
+    id: int
+    name: str
+    classification: str
+    speed: str
 
-
+ships = [
+    Ship(id=1, name= 'Kronos One', classification='K\'t\'inga-class', speed='Warp 2.6' ),
+      Ship(id=2, name= 'USS Excelsior NCC-2000', classification='Excelsior-Class', speed='Warp 2.6' ),
+      Ship(id=3, name= 'USS Defiant NX-74205', classification='n/a', speed='Warp 2.6' ),
+      Ship(id=4, name= 'USS Reliant NCC-1864', classification='n/a', speed='Warp 2.6' ),
+      Ship(id=5, name= 'USS Enterprise NCC-1701D', classification='Galaxy-Class', speed='> Warp 10' ),
+      Ship(id=6, name= 'USS Hathaway NCC-2593', classification='Galaxy-Class', speed='Warp 1' ),
+]
 # define some users
 users = [
     User(id=1, name='John', dob=date(1990, 1, 1)),
@@ -26,7 +38,7 @@ users = [
 
 
 @app.get("/api/", response_model=FastUI, response_model_exclude_none=True)
-def users_table() -> list[AnyComponent]:
+def ships_table() -> list[AnyComponent]:
     """
     Show a table of four users, `/api` is the endpoint the frontend will connect to
     when a user visits `/` to fetch components to render.
@@ -34,15 +46,15 @@ def users_table() -> list[AnyComponent]:
     return [
         c.Page(  # Page provides a basic container for components
             components=[
-                c.Heading(text='Users', level=2),  # renders `<h2>Users</h2>`
+                c.Heading(text='Ships', level=2),  # renders `<h2>Users</h2>`
                 c.Table(
-                    data=users,
+                    data=ships,
                     # define two columns for the table
                     columns=[
                         # the first is the users, name rendered as a link to their profile
-                        DisplayLookup(field='name', on_click=GoToEvent(url='/user/{id}/')),
+                        DisplayLookup(field='name', on_click=GoToEvent(url='/ships/{id}/')),
                         # the second is the date of birth, rendered as a date
-                        DisplayLookup(field='dob', mode=DisplayMode.date),
+                        DisplayLookup(field='speed', mode=DisplayMode.auto),
                     ],
                 ),
             ]
@@ -65,6 +77,24 @@ def user_profile(user_id: int) -> list[AnyComponent]:
                 c.Heading(text=user.name, level=2),
                 c.Link(components=[c.Text(text='Back')], on_click=BackEvent()),
                 c.Details(data=user),
+            ]
+        ),
+    ]
+@app.get("/api/ships/{ship_id}/", response_model=FastUI, response_model_exclude_none=True)
+def ship_profile(ship_id: int) -> list[AnyComponent]:
+    """
+    Ship profile page, the frontend will fetch this when the user visits `/ships/{id}/`.
+    """
+    try:
+        ship = next(s for s in ships if s.id == ship_id)
+    except StopIteration:
+        raise HTTPException(status_code=404, detail="Ship not found")
+    return [
+        c.Page(
+            components=[
+                c.Heading(text=ship.name, level=2),
+                c.Link(components=[c.Text(text='Back')], on_click=BackEvent()),
+                c.Details(data=ship),
             ]
         ),
     ]
