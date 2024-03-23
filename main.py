@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from fastui import FastUI, AnyComponent, prebuilt_html, components as c
 from fastui.components.display import DisplayMode, DisplayLookup
-from fastui.events import GoToEvent, BackEvent
+from fastui.events import GoToEvent, BackEvent, PageEvent
 from pydantic import BaseModel, Field
 from contextlib import asynccontextmanager
 app = FastAPI()
@@ -14,13 +14,20 @@ class User(BaseModel):
     id: int
     name: str
     dob: date = Field(title='Date of Birth')
-class Ship(BaseModel):
-    id: str
+class ShipForm(BaseModel):
     name: str
     sign:str
     classification: str
     speed: str
+class Ship(BaseModel):
+     id: str
+     name: str = Field(title='Name')
+     sign:str = Field(title='Call-Sign')
+     classification: str  = Field(title='Ship Classification')
+     speed: str  = Field(title='Maximum Speed')
 
+seed_data='ships_full.json'
+seed_data='ships_one.json'
 ships = [
     Ship(id='1', sign='n/n', name= 'Kronos One', classification='K\'t\'inga-class', speed='Warp 2.6' ),
     #   Ship(id=2, name= 'USS Excelsior NCC-2000', classification='Excelsior-Class', speed='Warp 2.6' ),
@@ -49,7 +56,7 @@ def ship_json_to_ship_entity(ship_json : str) -> Ship:
     return ship
 
 def read_ships():
-    with open("ships_full.json", "r") as read_content: 
+    with open(seed_data, "r") as read_content: 
         ship_data = json.load(read_content)
     for s in ship_data:
         ships.append(ship_json_to_ship_entity(s))
@@ -75,10 +82,31 @@ def ships_table() -> list[AnyComponent]:
                         DisplayLookup(field='classification', on_click=GoToEvent(url='/ships/{id}/')),
                     ],
                 ),
+                c.Div(components=[
+                    c.Link(
+                        components=[c.Button(text='Add ship')],
+                        on_click=GoToEvent(url='/ships/add')
+                    )
+                ])
             ]
         ),
     ]
 
+@app.get('/api/ships/add', response_model=FastUI, response_model_exclude_none=True)
+def add_ship():
+    return [
+        c.Page(components=[
+            c.Heading(text='Add Ship', level=2),
+            c.Paragraph (text='Add new Ship to th list'),
+            #c.ModelForm(
+            #    type=ShipForm,
+            #    submit_url='/api/ships/add',
+            #    #status_code=201
+            #)
+            c.ModelForm(model=ShipForm, submit_url='/api/ships/add') #, success_event=PageEvent(name='form_success')),
+
+        ])
+    ]
 @app.get("/api/ships/{ship_id}/", response_model=FastUI, response_model_exclude_none=True)
 def ship_profile(ship_id: str) -> list[AnyComponent]:
     """
