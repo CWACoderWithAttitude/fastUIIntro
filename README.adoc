@@ -12,5 +12,9 @@ DevContainer i created to get started w FastUI.
 The application is based on the example code published on https://github.com/pydantic/FastUI[the Github FastUI Page]
 
 == Resources
-https://www.youtube.com/watch?v=eBWrnSyN2iw[Promising tutorial...]
+* https://www.youtube.com/watch?v=eBWrnSyN2iw[Awesome tutorial...]
+
+* https://trans-organization-12.gitbook.io/fastui[Welcome to Fast UI]
+
+* https://fastui-demo.onrender.com[FastUI Demo Showcasing various UI Components]
 

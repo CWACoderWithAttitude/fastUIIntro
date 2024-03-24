@@ -1,24 +1,29 @@
 from datetime import date
+from typing import Annotated
 import json,  uuid
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from fastui import FastUI, AnyComponent, prebuilt_html, components as c
 from fastui.components.display import DisplayMode, DisplayLookup
 from fastui.events import GoToEvent, BackEvent, PageEvent
+from fastui.forms import SelectSearchResponse, fastui_form  #, FormResponse
 from pydantic import BaseModel, Field
 from contextlib import asynccontextmanager
+
 app = FastAPI()
 
-
-class User(BaseModel):
-    id: int
-    name: str
-    dob: date = Field(title='Date of Birth')
+#
+# Model used when adding new ships
+#
 class ShipForm(BaseModel):
     name: str
     sign:str
     classification: str
     speed: str
+
+#
+# Model used for everything persistence
+#
 class Ship(BaseModel):
      id: str
      name: str = Field(title='Name')
@@ -35,13 +40,6 @@ ships = [
     #   Ship(id=4, name= 'USS Reliant NCC-1864', classification='n/a', speed='Warp 2.6' ),
     #   Ship(id=5, name= 'USS Enterprise NCC-1701D', classification='Galaxy-Class', speed='> Warp 10' ),
     #   Ship(id=6, name= 'USS Hathaway NCC-2593', classification='Galaxy-Class', speed='Warp 1' ),
-]
-# define some users
-users = [
-    User(id=1, name='John', dob=date(1990, 1, 1)),
-    User(id=2, name='Jack', dob=date(1991, 1, 1)),
-    User(id=3, name='Jill', dob=date(1992, 1, 1)),
-    User(id=4, name='Jane', dob=date(1993, 1, 1)),
 ]
 ship_data = None
 
@@ -92,6 +90,16 @@ def ships_table() -> list[AnyComponent]:
         ),
     ]
 
+@app.post("/api/ships/add")
+async def create_ship(form: Annotated[ShipForm, fastui_form(ShipForm)]): # -> FormResponse:
+    id = str(uuid.uuid5(uuid.NAMESPACE_DNS, 'name'))
+    print('create_ship: id' + id)
+    ship = Ship(id = id, **form.model_dump()) # unpack... (pydantic function) 
+    print('create_ship: ' + str(ship))
+    ships.append(ship)
+    #return FormResponse(event=GoToEvent('/'))
+
+
 @app.get('/api/ships/add', response_model=FastUI, response_model_exclude_none=True)
 def add_ship():
     return [
@@ -107,6 +115,8 @@ def add_ship():
 
         ])
     ]
+
+
 @app.get("/api/ships/{ship_id}/", response_model=FastUI, response_model_exclude_none=True)
 def ship_profile(ship_id: str) -> list[AnyComponent]:
     """
