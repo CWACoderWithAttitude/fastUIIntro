@@ -5,6 +5,11 @@
         "shipClass": "California"
     },
     {
+        "name": "USS Kelce Mae",
+        "sign": "NCC-",
+        "shipClass": "n/n"
+    },
+    {
         "name": "USS Dauntless",
         "sign": "NCC-80816",
         "shipClass": ""
