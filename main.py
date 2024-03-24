@@ -93,9 +93,7 @@ def ships_table() -> list[AnyComponent]:
 @app.post("/api/ships/add")
 async def create_ship(form: Annotated[ShipForm, fastui_form(ShipForm)]): # -> FormResponse:
     id = str(uuid.uuid5(uuid.NAMESPACE_DNS, 'name'))
-    print('create_ship: id' + id)
-    ship = Ship(id = id, **form.model_dump()) # unpack... (pydantic function) 
-    print('create_ship: ' + str(ship))
+    ship = Ship(id=id, **form.model_dump()) # unpack... (pydantic function) 
     ships.append(ship)
     #return FormResponse(event=GoToEvent('/'))
 
