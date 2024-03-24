@@ -31,8 +31,8 @@ class Ship(BaseModel):
      classification: str  = Field(title='Ship Classification')
      speed: str  = Field(title='Maximum Speed')
 
-seed_data='ships_full.json'
 seed_data='ships_one.json'
+seed_data='ships_full.json'
 ships = [
     Ship(id='1', sign='n/n', name= 'Kronos One', classification='K\'t\'inga-class', speed='Warp 2.6' ),
     #   Ship(id=2, name= 'USS Excelsior NCC-2000', classification='Excelsior-Class', speed='Warp 2.6' ),
@@ -53,7 +53,8 @@ def ship_json_to_ship_entity(ship_json : str) -> Ship:
     ship = Ship(id=id, sign=sign, name=name, classification=classification, speed=speed)
     return ship
 
-def read_ships():
+@app.on_event("startup")
+async def read_ships():
     with open(seed_data, "r") as read_content: 
         ship_data = json.load(read_content)
     for s in ship_data:
@@ -95,6 +96,7 @@ async def create_ship(form: Annotated[ShipForm, fastui_form(ShipForm)]): # -> Fo
     id = str(uuid.uuid5(uuid.NAMESPACE_DNS, 'name'))
     ship = Ship(id=id, **form.model_dump()) # unpack... (pydantic function) 
     ships.append(ship)
+    #return SelectSearchResponse(event=GoToEvent('/'))
     #return FormResponse(event=GoToEvent('/'))
 
 
