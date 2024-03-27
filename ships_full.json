@@ -10,6 +10,20 @@
         "shipClass": "n/n"
     },
     {
+        "name": "USS Cayuga",
+        "captain": "Captain Marie Batel",
+        "sign": "NCC-1557",
+        "shipClass": "Constitution",
+        "details": "https://memory-alpha.fandom.com/wiki/USS_Cayuga"
+    },
+    {
+        "name": " USS Talos",
+        "captain": "Captain Marie Batel",
+        "sign": "NCC-",
+        "shipClass": "",
+        "details": "https://memory-alpha.fandom.com/wiki/USS_Talos"
+    },
+    {
         "name": "USS Dauntless",
         "sign": "NCC-80816",
         "shipClass": ""

@@ -31,15 +31,9 @@ class Ship(BaseModel):
      classification: str  = Field(title='Ship Classification')
      speed: str  = Field(title='Maximum Speed')
 
-seed_data='ships_one.json'
 seed_data='ships_full.json'
 ships = [
     Ship(id='1', sign='n/n', name= 'Kronos One', classification='K\'t\'inga-class', speed='Warp 2.6' ),
-    #   Ship(id=2, name= 'USS Excelsior NCC-2000', classification='Excelsior-Class', speed='Warp 2.6' ),
-    #   Ship(id=3, name= 'USS Defiant NX-74205', classification='n/a', speed='Warp 2.6' ),
-    #   Ship(id=4, name= 'USS Reliant NCC-1864', classification='n/a', speed='Warp 2.6' ),
-    #   Ship(id=5, name= 'USS Enterprise NCC-1701D', classification='Galaxy-Class', speed='> Warp 10' ),
-    #   Ship(id=6, name= 'USS Hathaway NCC-2593', classification='Galaxy-Class', speed='Warp 1' ),
 ]
 ship_data = None
 
@@ -62,7 +56,6 @@ async def read_ships():
 
 @app.get("/api/", response_model=FastUI, response_model_exclude_none=True)
 def ships_table() -> list[AnyComponent]:
-    read_ships()
     """
     Show a table of four users, `/api` is the endpoint the frontend will connect to
     when a user visits `/` to fetch components to render.
