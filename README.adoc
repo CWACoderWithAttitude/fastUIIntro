@@ -18,3 +18,4 @@ The application is based on the example code published on https://github.com/pyd
 
 * https://fastui-demo.onrender.com[FastUI Demo Showcasing various UI Components]
 
+* https://www.youtube.com/watch?v=Jl39FZs-uz8&list=PL-2EBeDYMIbSppj2GYHnvpZ9W69qmkInS&index=4[BugBytes on FastAPI Essentials - CRUD API with a Database and SQLModel]
