@@ -70,7 +70,7 @@ async def read_ships():
     # check for previously imported data
     stmt = select(StartrekShipModel)
     res = session.exec(stmt).first()
-    
+
     if ic(res) is None:
         print ('There appears to be NO data in the DB')
 
@@ -103,11 +103,18 @@ async def read_ships():
                 #session.add(ship)
     
     else:
-        print ('There appears to be data in the DB already ;-)')
+        print ('There appears to be data in the DB already :-) ')
     
     
 
     session.close()
+
+def getShipsFromDB():
+    with Session(engine) as session:
+        stmt = select(StartrekShipModel)
+        res = session.exec(stmt).all()
+        ic(res)
+    return res
 
 @app.get("/api/", response_model=FastUI, response_model_exclude_none=True)
 def ships_table() -> list[AnyComponent]:
@@ -116,23 +123,20 @@ def ships_table() -> list[AnyComponent]:
     when a user visits `/` to fetch components to render.
     """
 
-    with Session(engine) as session:
-        stmt = select(StartrekShipModel)
-        res = session.exec(stmt).all()
-        ic(res)
-        ships=res
+    ships = getShipsFromDB()
+
     return [
         c.Page(  # Page provides a basic container for components
             components=[
-                c.Heading(text='Ships', level=2),  # renders `<h2>Users</h2>`
+                c.Heading(text=f'{len(ships)} Ships', level=2),  # renders `<h2>Ships</h2>`
                 c.Table(
                     data=ships,
-                    # define two columns for the table
+                    # define theee columns for the table
                     columns=[
-                        # the first is the ships, name rendered as a link to their profile
+                        # the first two cols are rendered as a link to their profile
                         DisplayLookup(field='name', on_click=GoToEvent(url='/ships/{id}/')),
                         DisplayLookup(field='sign', on_click=GoToEvent(url='/ships/{id}/')),
-                        DisplayLookup(field='classification', on_click=GoToEvent(url='/ships/{id}/')),
+                        DisplayLookup(field='classification')
                     ],
                 ),
                 c.Div(components=[
