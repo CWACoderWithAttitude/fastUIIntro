@@ -8,9 +8,9 @@ engine = create_engine(f"sqlite:///{DB_FILE}", echo=True)
 class StartrekShipModel(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
-    sign:str
+    sign: str
     classification: str  
-    speed: str 
+    #speed: str 
 
 def create_tables():
     SQLModel.metadata.create_all(engine)

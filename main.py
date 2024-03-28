@@ -9,7 +9,8 @@ from fastui.events import GoToEvent, BackEvent, PageEvent
 from fastui.forms import SelectSearchResponse, fastui_form  #, FormResponse
 from pydantic import BaseModel, Field
 from contextlib import asynccontextmanager
-
+from sqlmodel import Session, select
+from database import StartrekShipModel, engine
 app = FastAPI()
 
 #
@@ -26,16 +27,24 @@ class ShipForm(BaseModel):
 #
 class Ship(BaseModel):
      id: str
-     name: str = Field(title='Name')
-     sign:str = Field(title='Call-Sign')
-     classification: str  = Field(title='Ship Classification')
-     speed: str  = Field(title='Maximum Speed')
+     name: str #= Field(title='Name')
+     sign:str #= Field(title='Call-Sign')
+     classification: str  #= Field(title='Ship Classification')
+     speed: str  #= Field(title='Maximum Speed')
 
 seed_data='ships_full.json'
+#seed_data='ships_one.json'
 ships = [
     Ship(id='1', sign='n/n', name= 'Kronos One', classification='K\'t\'inga-class', speed='Warp 2.6' ),
 ]
 ship_data = None
+from icecream import ic
+def ship_json_to_shipModel_entity(ship_json : str) -> StartrekShipModel:
+    ship = ship_json_to_ship_entity(ship_json)
+    ic(ship)
+    ssm = StartrekShipModel(id=ship.id, name=ship.name, speed=ship.speed, sign=ship.sign, classification=ship.classification)
+    ic(ssm)
+    return ssm
 
 def ship_json_to_ship_entity(ship_json : str) -> Ship:
     keys = ship_json.keys()
@@ -49,10 +58,56 @@ def ship_json_to_ship_entity(ship_json : str) -> Ship:
 
 @app.on_event("startup")
 async def read_ships():
-    with open(seed_data, "r") as read_content: 
-        ship_data = json.load(read_content)
-    for s in ship_data:
-        ships.append(ship_json_to_ship_entity(s))
+    import logging
+    logging.basicConfig()
+    logger = logging.getLogger('sqlalchemy.engine')
+    logger.setLevel(logging.DEBUG)
+    session = Session(engine)
+    # with open(seed_data, "r") as read_content: 
+    #     ship_data = json.load(read_content)
+    # for s in ship_data:
+    #     ships.append(ship_json_to_ship_entity(s))
+    # check for previously imported data
+    stmt = select(StartrekShipModel)
+    res = session.exec(stmt).first()
+    
+    if ic(res) is None:
+        print ('There appears to be NO data in the DB')
+
+        with open(seed_data, "r") as seed_content: 
+            ship_data = json.load(seed_content)
+            #ic(ship_data)
+            for s in ship_data:
+                ssm = StartrekShipModel(**s)
+                ic('>>'+str(ssm))
+                session.add(ssm)
+        #        ship = ship_json_to_shipModel_entity(s)
+        #ssm = StartrekShipModel(
+        #    id=str(uuid.uuid5(uuid.NAMESPACE_DNS, 'lhfkghirugiuhrggu0404f48ss'))
+        #    , name="ask"
+        #    , sign="djfkljvxidfouvjxlbfj"
+        #    , classification="skdfjlkfhlxhl"
+        #    )
+        
+        #session.add(ssm)
+        session.commit()
+        #session.add(StartrekShipModel(
+        #    id=str(uuid.uuid5(uuid.NAMESPACE_DNS, 'dmdlsmömlö'))
+        #    , name="ask"
+        #    , sign="vdölmdyä"
+        #    , speed='warp 42.01'
+        #)
+        
+                #ssm = StartrekShipModel(**ship)
+        #        print('ship: ' + str(ship))
+                #session.add(ship)
+    
+    else:
+        print ('There appears to be data in the DB already ;-)')
+    
+    
+
+    session.close()
 
 @app.get("/api/", response_model=FastUI, response_model_exclude_none=True)
 def ships_table() -> list[AnyComponent]:
@@ -60,6 +115,12 @@ def ships_table() -> list[AnyComponent]:
     Show a table of four users, `/api` is the endpoint the frontend will connect to
     when a user visits `/` to fetch components to render.
     """
+
+    with Session(engine) as session:
+        stmt = select(StartrekShipModel)
+        res = session.exec(stmt).all()
+        ic(res)
+        ships=res
     return [
         c.Page(  # Page provides a basic container for components
             components=[
