@@ -21,7 +21,8 @@
         "ms-azuretools.vscode-docker",
         "PKief.material-icon-theme",
         "wesbos.theme-cobalt2",
-        "asciidoctor.asciidoctor-vscode"
+        "asciidoctor.asciidoctor-vscode",
+        "qwtel.sqlite-viewer"
       ]
     }
   },
