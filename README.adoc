@@ -11,6 +11,10 @@ DevContainer i created to get started w FastUI.
 
 The application is based on the example code published on https://github.com/pydantic/FastUI[the Github FastUI Page]
 
+== Ideas
+* continue & complete the CRUD application
+* use https://daisyui.com[daisyUI: The most popular component library for Tailwind CSS]
+
 == Resources
 * https://www.youtube.com/watch?v=eBWrnSyN2iw[Awesome tutorial...]
 
@@ -18,4 +22,10 @@ The application is based on the example code published on https://github.com/pyd
 
 * https://fastui-demo.onrender.com[FastUI Demo Showcasing various UI Components]
 
+<<<<<<< HEAD
 * https://www.youtube.com/watch?v=Jl39FZs-uz8&list=PL-2EBeDYMIbSppj2GYHnvpZ9W69qmkInS&index=4[BugBytes on FastAPI Essentials - CRUD API with a Database and SQLModel]
+||||||| parent of 0a501d9 (doc: idea & ui plan)
+=======
+* https://www.youtube.com/watch?v=Jl39FZs-uz8&list=PL-2EBeDYMIbSppj2GYHnvpZ9W69qmkInS&index=4[BugBytes on FastAPI Essentials - CRUD API with a Database and SQLModel]
+* https://github.com/pydantic/FastUI/issues/65
+>>>>>>> 0a501d9 (doc: idea & ui plan)
