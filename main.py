@@ -11,34 +11,19 @@ from pydantic import BaseModel, Field
 from contextlib import asynccontextmanager
 from sqlmodel import Session, select
 from database import StartrekShipModel, engine
+from models import Ship, ShipForm
+from icecream import ic
+
+
 app = FastAPI()
 
-#
-# Model used when adding new ships
-#
-class ShipForm(BaseModel):
-    name: str
-    sign:str
-    classification: str
-    speed: str
 
-#
-# Model used for everything persistence
-#
-class Ship(BaseModel):
-     id: str
-     name: str #= Field(title='Name')
-     sign:str #= Field(title='Call-Sign')
-     classification: str  #= Field(title='Ship Classification')
-     speed: str  #= Field(title='Maximum Speed')
-
-seed_data='ships_full.json'
-#seed_data='ships_one.json'
-ships = [
-    Ship(id='1', sign='n/n', name= 'Kronos One', classification='K\'t\'inga-class', speed='Warp 2.6' ),
-]
+#seed_data='ships_full.json'
+seed_data='ships_one.json'
+#ships = [
+#    Ship(id='1', sign='n/n', name= 'Kronos One', classification='K\'t\'inga-class', speed='Warp 2.6' ),
+#]
 ship_data = None
-from icecream import ic
 def ship_json_to_shipModel_entity(ship_json : str) -> StartrekShipModel:
     ship = ship_json_to_ship_entity(ship_json)
     ic(ship)
@@ -91,6 +76,7 @@ async def read_ships():
         
         #session.add(ssm)
         session.commit()
+        #session.rollback()
         #session.add(StartrekShipModel(
         #    id=str(uuid.uuid5(uuid.NAMESPACE_DNS, 'dmdlsmömlö'))
         #    , name="ask"
@@ -180,10 +166,14 @@ def ship_profile(ship_id: str) -> list[AnyComponent]:
     """
     Ship profile page, the frontend will fetch this when the user visits `/ships/{id}/`.
     """
-    try:
-        ship = next(s for s in ships if s.id == ship_id)
-    except StopIteration:
+    #try:
+        #ship = next(s for s in ships if s.id == ship_id)
+    with Session(engine) as session:
+        ship = session.get(StartrekShipModel, ship_id)
+    if ship is None:
         raise HTTPException(status_code=404, detail="Ship not found")
+    #except StopIteration:
+    #    raise HTTPException(status_code=404, detail="Ship not found")
     return [
         c.Page(
             components=[
