@@ -41,7 +41,7 @@ def ship_json_to_ship_entity(ship_json : str) -> Ship:
     ship = Ship(id=id, sign=sign, name=name, classification=classification, speed=speed)
     return ship
 
-@app.on_event("startup")
+#@app.on_event("startup")
 async def read_ships():
     import logging
     logging.basicConfig()
@@ -66,28 +66,7 @@ async def read_ships():
                 ssm = StartrekShipModel(**s)
                 ic('>>'+str(ssm))
                 session.add(ssm)
-        #        ship = ship_json_to_shipModel_entity(s)
-        #ssm = StartrekShipModel(
-        #    id=str(uuid.uuid5(uuid.NAMESPACE_DNS, 'lhfkghirugiuhrggu0404f48ss'))
-        #    , name="ask"
-        #    , sign="djfkljvxidfouvjxlbfj"
-        #    , classification="skdfjlkfhlxhl"
-        #    )
-        
-        #session.add(ssm)
         session.commit()
-        #session.rollback()
-        #session.add(StartrekShipModel(
-        #    id=str(uuid.uuid5(uuid.NAMESPACE_DNS, 'dmdlsmömlö'))
-        #    , name="ask"
-        #    , sign="vdölmdyä"
-        #    , speed='warp 42.01'
-        #)
-        
-                #ssm = StartrekShipModel(**ship)
-        #        print('ship: ' + str(ship))
-                #session.add(ship)
-    
     else:
         print ('There appears to be data in the DB already :-) ')
     
@@ -138,8 +117,8 @@ def ships_table() -> list[AnyComponent]:
 @app.post("/api/ships/add")
 async def create_ship(form: Annotated[ShipForm, fastui_form(ShipForm)]): # -> FormResponse:
     id = str(uuid.uuid5(uuid.NAMESPACE_DNS, 'name'))
-    ship = Ship(id=id, **form.model_dump()) # unpack... (pydantic function) 
-    ships.append(ship)
+    #ship = Ship(id=id, **form.model_dump()) # unpack... (pydantic function) 
+    #ships.append(ship)
     #return SelectSearchResponse(event=GoToEvent('/'))
     #return FormResponse(event=GoToEvent('/'))
 
