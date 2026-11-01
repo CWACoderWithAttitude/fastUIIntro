@@ -2,7 +2,7 @@ annotated-types==0.6.0
 anyio==4.2.0
 click==8.1.7
 commonmark==0.9.1
-dnspython==2.6.1
+dnspython==2.9.0
 email_validator==2.1.1
 fastapi==0.110.0
 fastui==0.5.2
